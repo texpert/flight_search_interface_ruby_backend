@@ -22,13 +22,22 @@ class App < Roda
     # GET /search?from=Melbourne&to=Sydney&date=2018-09-02
     r.on 'search' do
       r.get do
-        airlines = CLIENT.request(:get, '/code-task/airlines').body
-        date_specified = r['date']
+        from = JSON.parse(CLIENT.request(:get, "/code-task/airports/?q=#{r['from']}").body)
+        to = JSON.parse(CLIENT.request(:get, "/code-task/airports/?q=#{r['to']}").body)
+        airlines = JSON.parse(CLIENT.request(:get, '/code-task/airlines').body)
+        departure = Date.parse(r['date'])
         flights = []
-        airlines.each do |a|
-          path = "/code-task/flight_search/#{a['code']}?date=#{date_specified}&from=#{r['from']}&to=#{r['to']}"
-          flights << CLIENT.request(:get, path)
+        ((departure - 2)..(departure + 2)).each do |d|
+          from.each do |f|
+            to.each do |t|
+              airlines.each do |a|
+                path = "/code-task/flight_search/#{a['code']}?date=#{d.to_s}&from=#{f['airportCode']}&to=#{t['airportCode']}"
+                flights |= JSON.parse(CLIENT.request(:get, path).body)
+              end
+            end
+          end
         end
+        flights.to_json
       end
     end
   end
