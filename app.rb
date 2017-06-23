@@ -1,6 +1,4 @@
 class App < Roda
-  plugin :streaming
-
   route do |r|
     # GET /
     r.root do
