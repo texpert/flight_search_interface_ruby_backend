@@ -1,4 +1,6 @@
 class App < Roda
+  plugin :streaming
+
   route do |r|
     # GET /
     r.root do
@@ -26,18 +28,18 @@ class App < Roda
         to = JSON.parse(CLIENT.request(:get, "/code-task/airports/?q=#{r['to']}").body)
         airlines = JSON.parse(CLIENT.request(:get, '/code-task/airlines').body)
         departure = Date.parse(r['date'])
-        flights = []
-        ((departure - 2)..(departure + 2)).each do |d|
-          from.each do |f|
-            to.each do |t|
-              airlines.each do |a|
-                path = "/code-task/flight_search/#{a['code']}?date=#{d.to_s}&from=#{f['airportCode']}&to=#{t['airportCode']}"
-                flights |= JSON.parse(CLIENT.request(:get, path).body)
+        stream do |out|
+          ((departure - 2)..(departure + 2)).each do |d|
+            from.each do |f|
+              to.each do |t|
+                airlines.each do |a|
+                  path = "/code-task/flight_search/#{a['code']}?date=#{d.to_s}&from=#{f['airportCode']}&to=#{t['airportCode']}"
+                  out << CLIENT.request(:get, path).body
+                end
               end
             end
           end
         end
-        flights.to_json
       end
     end
   end
