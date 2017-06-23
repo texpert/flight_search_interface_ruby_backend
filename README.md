@@ -8,6 +8,20 @@ Rubygems and bundler gem installed.
 
 ## Installing the application
 
+### The quick automated way cloning from GitHub
+
+Ensure you start a shell in a user accessible folder.
+
+Run the start scriipt:
+
+```
+$ ./start.sh
+```
+
+The application will be cloned, installed and started with server listening on localhost:3000
+
+### Manual install and running of the application
+ 
 Check to see whether RubyGems is installed:
 
 ```
@@ -52,12 +66,32 @@ Install application's bundle:
 $ bundle install
 ```
 
-## Running the application
+### Running the application
 
 Start the server:
 
 ```
-$ rackup
+$ puma -C config/puma.rb
 ```
 
-After the server will start, the backend could be accessed sending HTTP requests to http://localhost:9292
+After the server start, the backend could be accessed sending HTTP requests to http://localhost:3000
+
+## Sample queries:
+
+/airlines
+
+```
+$ curl "http://localhost:3000/airlines"
+```
+
+/airports
+
+```
+$ curl "http://localhost:3000/airports?q=Melbourne"
+```
+
+/search
+
+```
+curl "http://localhost:3000/search?from=Melbourne&to=Sydney&date=2018-09-02"
+```
