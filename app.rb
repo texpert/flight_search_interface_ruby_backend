@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class App < Roda
   route do |r|
     # GET /
@@ -31,7 +33,7 @@ class App < Roda
             from.each do |f|
               to.each do |t|
                 airlines.each do |a|
-                  path = "/code-task/flight_search/#{a['code']}?date=#{d.to_s}&from=#{f['airportCode']}&to=#{t['airportCode']}"
+                  path = "/code-task/flight_search/#{a['code']}?date=#{d}&from=#{f['airportCode']}&to=#{t['airportCode']}"
                   out << CLIENT.request(:get, path).body
                 end
               end
