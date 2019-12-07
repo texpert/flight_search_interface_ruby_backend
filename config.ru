@@ -10,6 +10,6 @@ require 'roda'
 Roda.plugin :streaming
 
 UNRELOADER.require './app.rb'
-CLIENT = OAuth2::Client.new('client_id', 'client_secret', site: 'http://node.locomote.com/')
+CLIENT = OAuth2::Client.new('client_id', 'client_secret', site: 'http://node.locomote.com/', raise_errors: false)
 
 run UNRELOADER
