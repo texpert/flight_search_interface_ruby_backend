@@ -21,7 +21,7 @@ GEM
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-unreloader (1.7.0)
-    roda (3.26.0)
+    roda (3.41.0)
       rack
     ruby2_keywords (0.0.4)
 
