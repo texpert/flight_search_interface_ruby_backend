@@ -1,14 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    faraday (0.17.1)
+    faraday (1.3.0)
+      faraday-net_http (~> 1.0)
       multipart-post (>= 1.2, < 3)
-    jwt (2.2.1)
-    multi_json (1.14.1)
+      ruby2_keywords
+    faraday-net_http (1.0.1)
+    jwt (2.2.2)
+    multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     nio4r (2.5.2)
-    oauth2 (1.4.2)
+    oauth2 (1.4.4)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
@@ -20,6 +23,7 @@ GEM
     rack-unreloader (1.7.0)
     roda (3.26.0)
       rack
+    ruby2_keywords (0.0.4)
 
 PLATFORMS
   ruby
