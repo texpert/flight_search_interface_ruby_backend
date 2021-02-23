@@ -3,7 +3,7 @@ GEM
   specs:
     faraday (0.17.1)
       multipart-post (>= 1.2, < 3)
-    jwt (2.2.1)
+    jwt (2.2.2)
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
